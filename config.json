@@ -1,0 +1,9 @@
+{
+    
+    "user": "sa",
+    "password": "server",
+    "server": "127.0.0.1\\server",
+    "database": "Ebulletin",
+    "port":1433
+
+}
