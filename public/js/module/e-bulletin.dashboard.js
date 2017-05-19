@@ -91,7 +91,13 @@ onsubmit = function(){
 	
 }
 ondashboard_delete = function(e){
+	var value={},tr = $(this);
 	var post_id = e.target.attributes[1].value;
+	value.post_id = post_id;
+	configMap.dashboard_model.delete_post(value,function(response){
+		tr.parent().parent().remove();
+	});
+
 }
 setcontent = function(){
 configMap.dashboard_model.get_dashboard(function(response){

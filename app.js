@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+app.post('/delete_post',routes.post_delete);
 app.post('/login', routes.login);
 app.post('/upload',routes.upload);
 app.get('/get_dashboard',routes.get_dashboard);

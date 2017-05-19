@@ -110,6 +110,28 @@ exports.upload = function(req,res){
 	
 }
 
+exports.post_delete = function(req,res){
+	post_id = req.body.post_id;
+	  sql.close();
+	  sql.connect(config).then(pool => {
+
+   		 // Stored procedure 
+    
+			return pool.request()
+			.input('post_id', sql.Int, post_id)
+			.execute('delete_post')
+		}).then(result => {
+			res.send(result.recordset)
+		}).catch(err => {
+			// ... error checks
+			console.log(err) 
+		})
+		
+	sql.on('error', err => {
+		console.log(err)
+	})
+}
+
 
 exports.get_dashboard = function(req,res){
 	  sql.close();

@@ -50,14 +50,16 @@ ebulletin.model = (function () {
 
 dashboard = (function(){
   
-   var submitdata,get_dashboard;
+   var submitdata,get_dashboard,delete_post;
 
      submitdata = curryStoreData("/upload");
      get_dashboard = curryFetchData("/get_dashboard");
+     delete_post = curryStoreData("/delete_post");
 
     return {
     submitdata:submitdata,
-    get_dashboard:get_dashboard
+    get_dashboard:get_dashboard,
+    delete_post:delete_post
     }
 
    }());
