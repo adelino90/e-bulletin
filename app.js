@@ -8,7 +8,7 @@ var session = require('express-session');
 var routes = require('./routes/index');
  var express= require('express');
  var app = express();
- 
+ app.setMaxListeners(0);
  
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

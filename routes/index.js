@@ -3,7 +3,6 @@ const sql = require('mssql');
 var path = require('path');
 var sess;
 
-
 exports.index = function(req, res, next) {
  res.render('index',{title:"E-Buletin Website"});
 
