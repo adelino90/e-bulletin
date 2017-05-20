@@ -17,7 +17,7 @@ configMap = {
 	anchor_schema_map : {
 	chat : { opened : true, closed : true , hidden:true },
 	bclick:{click:true},
-	option:{home:true,contact:true,dashboard:true,sign_out:true},
+	option:{home:true,contact:true,dashboard:true,sign_out:true,manage_posts:true},
 	 _option : {id : true},
 	 filter:{search:true},
 	 _filter :{search_str:true}
@@ -172,6 +172,9 @@ onHashchange = function ( event ) {
 	{
 			s_option_proposed = anchor_map_proposed.option;
 		switch(s_option_proposed){
+			case "manage_posts":
+			
+			break;
 			case "home":
 					setLoader.open();
 					ebulletin.home.initModule( jqueryMap.$content );

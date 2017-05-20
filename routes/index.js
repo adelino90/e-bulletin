@@ -18,9 +18,12 @@ exports.logout = function(req, res, next) {
 exports.getnav = function(req, res, next) {
 var menu = {navigation:[{bEnabled:true,bGranted:true,bVisible:true,nCaption:"HOME",nId:1,option:"home"},
 			{bEnabled:true,bGranted:true,bVisible:true,nCaption:"CONTACT US",nId:2,option:"contact"},
-			{bEnabled:true,bGranted:true,bVisible:true,dropdown:true,dropdown_options:[{id:1,option:"dashboard",nCaption:"My Dashboard"},{id:2,option:"sign_out",nCaption:"Sign Out"}],nCaption:"Welcome",nId:3,option:"none"}
+			{bEnabled:true,bGranted:true,bVisible:true,dropdown:true,dropdown_options:[{id:1,option:(req.session.usertype == 2 ? "dashboard" : "manage_posts"),nCaption:(req.session.usertype == 2 ? "My Dashboard" : "Manage Posts")},
+			{id:2,option:"sign_out",nCaption:"Sign Out"}],nCaption:"Welcome",nId:3,option:"none"}
             
 ],name:req.session.name};
+
+
 res.send(menu);
 
 }
@@ -57,6 +60,7 @@ exports.login = function(req,res){
 				if(result.recordset.length>0){
 					  req.session.user_ID = result.recordset[0].id;
 					  req.session.name = result.recordset[0].first_name;
+					  req.session.usertype = result.recordset[0].user_type_id;
 					  res.send({valid:true,name:req.session.name})
 				}
 				else
