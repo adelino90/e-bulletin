@@ -1,7 +1,7 @@
-.ebulletin-dashboard-content{
+.ebulletin-post_request-content{
 	background:#F5F5F5;
 }
-.ebulletin-dashboard-options,.ebulletin-dashboard-list{
+.ebulletin-post_request-options,.ebulletin-post_request-list{
 background:#FFFFFF;
 border-radius: 10px;
 padding:10px 30px 10px 30px;
@@ -16,7 +16,7 @@ padding:10px 30px 10px 30px;
 .modal-header .close{
 	color:#fff;
 }
-.ebulletin-dashboard-edit:hover{
+.ebulletin-post_request-approve{
 color: #66ff33;
 }
 .pending{
@@ -25,31 +25,31 @@ color: #66ff33;
 .approved{
 	color:#66ff33;
 }
-.ebulletin-dashboard-table td:nth-child(1){
+.ebulletin-post_request-table td:nth-child(1){
 	width:20%;
 	padding-left:20px;
 }
-.ebulletin-dashboard-table td:nth-child(4){
+.ebulletin-post_request-table td:nth-child(4){
 	width:20%;
 	padding-left:20px;
 }
-.ebulletin-dashboard-table th:nth-child(1){
+.ebulletin-post_request-table th:nth-child(1){
 	width:20%;
 	padding-left:20px;
 }
-.ebulletin-dashboard-table th:nth-child(4){
+.ebulletin-post_request-table th:nth-child(4){
 	width:20%;
 	padding-left:20px;
 }
-.ebulletin-dashboard-delete:hover{
+.ebulletin-post_request-reject{
 	color:#ff4000;
 }
-.ebulletin-dashboard-list{	
+.ebulletin-post_request-list{	
 margin-top:10px;
 }
-.ebulletin-dashboard-options-right{
+.ebulletin-post_request-options-right{
 float:right;
 }
-.ebulletin-dashboard-options-left{
+.ebulletin-post_request-options-left{
 float:left;
 }

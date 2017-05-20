@@ -173,7 +173,7 @@ onHashchange = function ( event ) {
 			s_option_proposed = anchor_map_proposed.option;
 		switch(s_option_proposed){
 			case "manage_posts":
-			
+				ebulletin.post_request.initModule( jqueryMap.$content );
 			break;
 			case "home":
 					setLoader.open();
