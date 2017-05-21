@@ -6,13 +6,13 @@ configMap = {
 	
 	
 	dashboard_model:null,
-	authorize_user:null,
+	admin_user:null,
 	change_option_anchor:null,	
-    settable_map : {dashboard_model:true,change_option_anchor:true,authorize_user:true}
+    settable_map : {dashboard_model:true,change_option_anchor:true,admin_user:true}
 },
 stateMap = {$container : undefined, anchor_map : {} ,resize_idto : undefined },
 jqueryMap = {},
-copyAnchorMap,setJqueryMap,configModule,onTapAcct,setChatAnchor,onClickChat,setcontent,onsubmit, initModule;
+copyAnchorMap,setJqueryMap,configModule,onTapAcct,setChatAnchor,onClickChat,setcontent,onsubmit,helper, initModule;
 
 // Begin DOM method /setJqueryMap/
 setJqueryMap = function () {
@@ -38,14 +38,28 @@ setJqueryMap = function () {
     });
     return true;
   };
+helper = function(){
 
+    Handlebars.registerHelper('viewed', function(value, options) {
+		var html = '';
+		if(value =='False')
+			html = '<i class="fa fa-envelope ebulletin-post_request-approve" data-id="2" title ="view">';
+		else
+			html ='<i class="fa fa-envelope-open ebulletin-post_request-approve" data-id="2" title ="view">';	
+		return html;	
+    });
+  }
 
 setcontent = function(){
-		stateMap.$container.html(Handlebars.templates.post_request());
-		setJqueryMap();
-		$.fn.datepicker.defaults.format = "yyyy/mm/dd";
-		jqueryMap.$date_from.datepicker({});
-		jqueryMap.$date_to.datepicker({});
+		helper();
+		configMap.dashboard_model.get_admin_post(function(response){
+			var data = {dashboard_data:response};
+			stateMap.$container.html(Handlebars.templates.post_request(data));
+			setJqueryMap();
+			$.fn.datepicker.defaults.format = "yyyy/mm/dd";
+			jqueryMap.$date_from.datepicker({});
+			jqueryMap.$date_to.datepicker({});
+		})
 
 }
 
@@ -54,7 +68,15 @@ setcontent = function(){
 initModule = function ( $container ) {
 	stateMap.$container = $container;
 	stateMap.$container.off().empty();
+
+	configMap.admin_user(function(response){
+		if(!response){	
+			configMap.change_option_anchor('home','ebulletin',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+		}
+		else
 			setcontent();
+		
+	})
 };
     return { initModule : initModule,configModule:configModule };
 }());

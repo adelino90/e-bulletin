@@ -26,7 +26,7 @@ configMap = {
 },
 stateMap = {$container : undefined, anchor_map : {} ,resize_idto : undefined},
 jqueryMap = {},
-initModule,copyAnchorMap,setJqueryMap, changeAnchorPart, onHashchange, setOptionAnchor ,user_authorize,setLoader;
+initModule,copyAnchorMap,setJqueryMap, changeAnchorPart, onHashchange, setOptionAnchor ,user_authorize,setLoader,admin_authorize;
 //----------------- END MODULE SCOPE VARIABLES ---------------
 //-------------------- BEGIN UTILITY METHODS -----------------
 //--------------------- END UTILITY METHODS ------------------
@@ -132,6 +132,14 @@ setLoader = (function(){
 
 user_authorize = function(fn){
 	ebulletin.model.account.get_session(function(data){
+               if(data.valid=="false")
+					fn(false);
+			   else
+					fn(true);		
+	 });			
+}
+admin_authorize = function(fn){
+	ebulletin.model.account.admin_session(function(data){
                if(data.valid=="false")
 					fn(false);
 			   else
@@ -313,11 +321,11 @@ initModule = function ( $container ) {
 	schema_map : configMap.anchor_schema_map
 	});
 
-	  ebulletin.nav.configModule({
-    	  set_option_anchor : setOptionAnchor,
-		  $container :jqueryMap.$content,
-		  menu_model : ebulletin.model.navigation,
-		  account_model : ebulletin.model.account
+	ebulletin.nav.configModule({
+	  set_option_anchor : setOptionAnchor,
+	  $container :jqueryMap.$content,
+	  menu_model : ebulletin.model.navigation,
+	  account_model : ebulletin.model.account
     });
 	ebulletin.contact.configModule({
 		changeAnchorPart:changeAnchorPart,
@@ -326,9 +334,16 @@ initModule = function ( $container ) {
 	ebulletin.dashboard.configModule({
 		change_option_anchor:setOptionAnchor,
 		authorize_user  : user_authorize,
-			dashboard_model  : ebulletin.model.dashboard
+		dashboard_model  : ebulletin.model.dashboard
 	})
-		ebulletin.home.configModule({
+	ebulletin.post_request.configModule({
+		change_option_anchor:setOptionAnchor,
+		admin_user  : admin_authorize,
+		dashboard_model  : ebulletin.model.dashboard
+	})
+
+
+	ebulletin.home.configModule({
 		changeAnchorPart:changeAnchorPart
 	})
 	 ebulletin.nav.initModule(jqueryMap.$nav);

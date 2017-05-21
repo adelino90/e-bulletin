@@ -28,8 +28,13 @@ app.get('/logout', routes.logout);
 app.get('/file', routes.file);
 app.get('/', routes.index);
 app.get('/getsession', routes.session);
+app.get('/getadminsession',routes.adminsession);
 app.get('/getnav',routes.getnav);
 app.get('/contacts',routes.contact);
+app.get('/manage_posts',routes.get_admin_post);
+
+
+
 
 var server = http.createServer(app).listen(3000, function() {
 	console.log('App started on port ' + 3000);

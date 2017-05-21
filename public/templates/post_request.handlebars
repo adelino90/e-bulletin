@@ -31,15 +31,17 @@
 									  </tr>
 									</thead>
 									<tbody>
-										 
-												<tr>
-														<td>Civil Service</td>
-                                                        <td>Adelino R. Justo</td>
-														<td><span class="approved">Approved</span></td>
-														<td>May 20 2017</td>
-														<td><i class="fa fa-check ebulletin-post_request-approve" data-id="2"></i>&nbsp;<i class="fa fa-close ebulletin-post_request-reject" data-id="2"></i></td>
-												</tr>
-									
+										   <!-- Data Here -->
+											  {{#each dashboard_data}}
+													<tr>
+															<td>{{title}}</td>
+															<td>{{poser}}</td>
+															<td><span class="{{status}}">{{status}}</span></td>
+															<td>May 20 2017</td>
+															<td class="ebulletin-post_request_action">{{#viewed viewed}} {{/viewed}}</i></td>
+													</tr>
+												{{/each}}
+												<!-- data -->
 									</tbody>
 								  </table>
 								</div>
@@ -49,55 +51,3 @@
 				</div>
 
 		
-		<!-- Modal -->
-			<div id="ebulletin-add-post-container" class="modal fade" role="dialog">
-				  <div class="modal-dialog">
-
-					<!-- Modal content-->
-					<div class="modal-content">
-					  <div class="ebulletin-dahboard-modal-header modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Add Post</h4>
-					  </div>
-					  <div class="modal-body ebulletin-add-post-modal-body">
-							<div class="form-group success_div text-center">
-								
-							</div>
-							 <div class="form-group">
-								  <label for="focusedInput">Title</label>
-								  <input class="form-control" id="t_title" type="text">
-							</div>
-							 <div class="form-group">
-								  <label for="focusedInput">Subject</label>
-								  <input class="form-control" id="s_subject" type="text">
-							</div>
-							 <div class="form-group">
-								  <label for="focusedInput">File</label>
-								  <input class="form-control" id="f_file" type="file">
-							</div>
-							<div class="form-group">
-							  <label for="comment">Description:</label>
-							  <textarea class="form-control" rows="5" id="description"></textarea>
-							</div>
-							<div class="form-group">
-								<div class="row">
-									<div class="col-md-12">
-										<label for="comment">Posting Date:</label>
-									</div>
-									<div class="col-md-5">
-										<input class="form-control" id="posting_date_from" placeholder="From"  type="text">
-									 </div>
-									 <div class="col-md-5">
-										<input class="form-control" id="posting_date_to" placeholder="To"  type="text">
-									 </div>
-								</div>
-							</div>
-					  </div>
-					  <div class="modal-footer">
-						<button type="button" class="btn btn-primary" id = "submit">Submit</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					  </div>
-					</div>
-
-				  </div>
-			</div>

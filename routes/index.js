@@ -46,6 +46,13 @@ exports.session = function(req,res){
 	 res.send({valid:"false"});
 
 }
+exports.adminsession = function(req,res){
+	if(req.session.req.session.usertype==1)
+	 res.send({valid:"true"});
+	else 
+	 res.send({valid:"false"});
+
+}
 exports.login = function(req,res){
 	sql.close();
 		 user=req.body.username;
@@ -159,4 +166,25 @@ exports.get_dashboard = function(req,res){
 exports.file = function(req,res){
 
 	 res.render('upload',{});
+}
+
+exports.get_admin_post = function(req,res){
+	sql.close();
+	  sql.connect(config).then(pool => {
+
+   		 // Stored procedure 
+    
+			return pool.request()
+			.execute('admin_post_view')
+		}).then(result => {
+			console.log(result.recordset)
+			res.send(result.recordset)
+		}).catch(err => {
+			// ... error checks
+			console.log(err) 
+		})
+		
+	sql.on('error', err => {
+		console.log(err)
+	})
 }

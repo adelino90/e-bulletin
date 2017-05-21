@@ -26,14 +26,16 @@ ebulletin.model = (function () {
   };
 
   account = (function(){
-	 var login,get_session,logout;
+	 var login,get_session,logout,admin_session;
 	 login = curryStoreData('/login');
    logout = curryFetchData('/logout');
 	 get_session = curryFetchData('/getsession');
+   admin_session = curryFetchData('/getadminsession');
 	  return {
       login:login,
-	  get_session:get_session,
-    logout:logout
+	    get_session:get_session,
+      logout:logout,
+      admin_session:admin_session
     }
 	}());
   contact= (function(){
@@ -50,16 +52,17 @@ ebulletin.model = (function () {
 
 dashboard = (function(){
   
-   var submitdata,get_dashboard,delete_post;
+   var submitdata,get_dashboard,delete_post,get_admin_post;
 
      submitdata = curryStoreData("/upload");
      get_dashboard = curryFetchData("/get_dashboard");
      delete_post = curryStoreData("/delete_post");
-
+     get_admin_post = curryFetchData("/manage_posts");            
     return {
     submitdata:submitdata,
     get_dashboard:get_dashboard,
-    delete_post:delete_post
+    delete_post:delete_post,
+    get_admin_post:get_admin_post
     }
 
    }());
