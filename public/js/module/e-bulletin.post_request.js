@@ -12,7 +12,7 @@ configMap = {
 },
 stateMap = {$container : undefined, anchor_map : {} ,resize_idto : undefined },
 jqueryMap = {},
-copyAnchorMap,setJqueryMap,configModule,onTapAcct,setChatAnchor,onClickChat,setcontent,onsubmit,helper, initModule;
+copyAnchorMap,setJqueryMap,configModule,onTapAcct,setChatAnchor,onClickChat,setcontent,onsubmit,helper,viewclicked, initModule;
 
 // Begin DOM method /setJqueryMap/
 setJqueryMap = function () {
@@ -26,7 +26,8 @@ setJqueryMap = function () {
 					$submit : $container.find('#submit'),
 					$success_div : $container.find('.success_div'),
 					$edit_button : $container.find('.ebulletin-dashboard-edit'),
-					$delete_button : $container.find('.ebulletin-dashboard-delete')
+					$delete_button : $container.find('.ebulletin-dashboard-delete'),
+					$view_button : $container.find('.ebulletin-post_request-view')
 				}
 };
 
@@ -42,23 +43,27 @@ helper = function(){
 
     Handlebars.registerHelper('viewed', function(value, options) {
 		var html = '';
+	console.log(options)
 		if(value =='False')
-			html = '<i class="fa fa-envelope ebulletin-post_request-approve" data-id="2" title ="view">';
+			html = '<i class="fa fa-envelope ebulletin-post_request-view" data-id="2" title ="view">';
 		else
-			html ='<i class="fa fa-envelope-open ebulletin-post_request-approve" data-id="2" title ="view">';	
+			html ='<i class="fa fa-envelope-open ebulletin-post_request-view" data-id="2" title ="view">';	
 		return html;	
     });
   }
 
+
+viewclicked = function(){
+	var post_id = $(this).parent().attr('data-id');
+	configMap.change_option_anchor('view_post',post_id);
+}
 setcontent = function(){
 		helper();
 		configMap.dashboard_model.get_admin_post(function(response){
 			var data = {dashboard_data:response};
 			stateMap.$container.html(Handlebars.templates.post_request(data));
 			setJqueryMap();
-			$.fn.datepicker.defaults.format = "yyyy/mm/dd";
-			jqueryMap.$date_from.datepicker({});
-			jqueryMap.$date_to.datepicker({});
+			jqueryMap.$view_button.click(viewclicked);
 		})
 
 }
