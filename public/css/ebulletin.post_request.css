@@ -41,3 +41,9 @@ float:right;
 .ebulletin-post_request-options-left{
 float:left;
 }
+.post_container{
+	background: #ebebe0;
+	margin-top: 10px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
