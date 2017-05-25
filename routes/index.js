@@ -144,9 +144,7 @@ app.post('/delete_post', function(req,res){
 app.get('/get_dashboard',function(req,res){
 	  sql.close();
 	  sql.connect(config).then(pool => {
-
    		 // Stored procedure 
-    
 			return pool.request()
 			.input('user_id', sql.Int, req.session.user_ID)
 			.execute('get_dashboard')
@@ -164,7 +162,6 @@ app.get('/get_dashboard',function(req,res){
 
 
 app.get('/file', function(req,res){
-
 	 res.render('upload',{});
 });
 

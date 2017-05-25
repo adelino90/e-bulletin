@@ -21,6 +21,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // dynamically include routes (Controller)
+
 fs.readdirSync('./routes').forEach(function (file) {
   if(file.substr(-3) == '.js') {
       route = require('./routes/' + file);
