@@ -1,6 +1,7 @@
 var config=require('../config.json');
 const sql = require('mssql');
 var path = require('path');
+var account = require('../model/account');
 var sess;
 module.exports.controller = function(app) {
 app.get('/', function(req, res, next) {
@@ -15,15 +16,10 @@ app.get('/logout', function(req, res, next) {
 });
 
 app.get('/getnav',function(req, res, next) {
-	var menu = {navigation:[{bEnabled:true,bGranted:true,bVisible:true,nCaption:"HOME",nId:1,option:"home"},
-			{bEnabled:true,bGranted:true,bVisible:true,nCaption:"CONTACT US",nId:2,option:"contact"},
-			{bEnabled:true,bGranted:true,bVisible:true,dropdown:true,dropdown_options:[{id:1,option:(req.session.usertype == 2 ? "dashboard" : "manage_posts"),nCaption:(req.session.usertype == 2 ? "My Dashboard" : "Manage Posts")},
-			{id:2,option:"sign_out",nCaption:"Sign Out"}],nCaption:"Welcome",nId:3,option:"none"}
-			],name:req.session.name};
-
-
-	res.send(menu);
-
+	var session = req.session;
+	account.get_navigation(session,function(data){
+		res.send(data);
+	});
 });
 
 
@@ -52,16 +48,9 @@ app.get('/getadminsession',function(req,res){
 
 });
 app.post('/login',function(req,res){
-	sql.close();
-		 user=req.body.username;
-		 pass=req.body.password;
-		sql.connect(config).then(pool => {
-			    
-			return pool.request()
-			.input('input_parameter', sql.NVarChar, user)
-			.input('input_parameter2', sql.NVarChar, pass)
-			.query('select * from ebulletin_account_tbl where username = @input_parameter AND password=@input_parameter2')
-			}).then(result => {
+	var data = req.body;
+	account.login(data,function(result){
+
 				if(result.recordset.length>0){
 					  req.session.user_ID = result.recordset[0].id;
 					  req.session.name = result.recordset[0].first_name;
@@ -70,7 +59,7 @@ app.post('/login',function(req,res){
 				}
 				else
 				 res.send({valid:false})
-			});
+		});
 	
 });
 
@@ -85,79 +74,46 @@ app.post('/upload',function(req,res){
   console.log(req.body);
   // Use the mv() method to place the file somewhere on your server 
   sampleFile.mv('./public/upload/'+name+'', function(err) {
+
+
     if (err)
       return res.status(500).send(err);
-	  sql.close();
-	  sql.connect(config).then(pool => {
-
-   		 // Stored procedure 
-    
-			return pool.request()
-			.input('user_id', sql.Int, req.session.user_ID)
-			.input('title', sql.NVarChar, req.body.title)
-			.input('subject', sql.NVarChar, req.body.subject)
-			.input('filename', sql.NVarChar, name)
-			.input('description', sql.NVarChar, req.body.description)
-			.input('pdate_from', sql.NVarChar, req.body.date_from)
-			.input('pdate_to',  sql.NVarChar, req.body.date_to)
-			.input('status',  sql.NVarChar, false)
-			.execute('insert_post')
-		}).then(result => {
-			 res.send('Success!');
-			console.dir(result)
-		}).catch(err => {
-			// ... error checks
-			console.log(err) 
-		})
-		
-	sql.on('error', err => {
-		console.log(err)
-	})
+	 
+	 var odata = {};
+	 odata.user_ID = req.session.user_ID;
+	 odata.title = req.body.title;
+	 odata.subject = req.body.subject;
+	 odata.name = name;
+	 odata.description = req.body.description;
+	 odata.date_from = req.body.date_from;
+	 odata.date_to = req.body.to;
+	 account.save_post(odata,function(rdata){
+		 if(rdata)
+		 	res.send('Success!');
+	 })
    
+
   });
 	
 });
 
 app.post('/delete_post', function(req,res){
-	post_id = req.body.post_id;
-	  sql.close();
-	  sql.connect(config).then(pool => {
 
-   		 // Stored procedure 
-    
-			return pool.request()
-			.input('post_id', sql.Int, post_id)
-			.execute('delete_post')
-		}).then(result => {
-			res.send(result.recordset)
-		}).catch(err => {
-			// ... error checks
-			console.log(err) 
-		})
-		
-	sql.on('error', err => {
-		console.log(err)
-	})
+	post_id = req.body.post_id;
+
+	account.post_delete(post_id,function(ret){
+		res.send(ret);
+	});
+
 });
 
 
 app.get('/get_dashboard',function(req,res){
-	  sql.close();
-	  sql.connect(config).then(pool => {
-   		 // Stored procedure 
-			return pool.request()
-			.input('user_id', sql.Int, req.session.user_ID)
-			.execute('get_dashboard')
-		}).then(result => {
-			res.send(result.recordset)
-		}).catch(err => {
-			// ... error checks
-			console.log(err) 
-		})
-		
-	sql.on('error', err => {
-		console.log(err)
-	})
+
+	  session_id =  req.session.user_ID;
+	 account.get_dashboard(session_id,function(ret){
+		 res.send(ret);
+	 });
 });
 
 
@@ -166,24 +122,9 @@ app.get('/file', function(req,res){
 });
 
 app.get('/manage_posts', function(req,res){
-	sql.close();
-	  sql.connect(config).then(pool => {
-
-   		 // Stored procedure 
-    
-			return pool.request()
-			.execute('admin_post_view')
-		}).then(result => {
-			console.log(result.recordset)
-			res.send(result.recordset)
-		}).catch(err => {
-			// ... error checks
-			console.log(err) 
-		})
-		
-	sql.on('error', err => {
-		console.log(err)
-	})
+	 account.get_admin_dashboard(function(ret){
+		 res.send(ret);
+	 })
 });
 
 }
