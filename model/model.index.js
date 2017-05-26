@@ -85,10 +85,11 @@ get_dashboard = function(session_id,callback){
 		})
 
 }
-get_admin_dashboard = function(callback){
+get_admin_dashboard = function(id,callback){
       sql.close();
 	  sql.connect(config).then(pool => {
 			return pool.request()
+			.input('user_id', sql.Int, id)
 			.execute('admin_post_view')
 		}).then(result => {
 			callback(result.recordset)
@@ -101,6 +102,33 @@ get_admin_dashboard = function(callback){
             console.log(err)
         })
 }
+
+view_post = function(data,callback){
+	var id = data.id, user_id = data.user_id
+	console.log(data);
+	  sql.close();
+	sql.connect(config, err => {
+
+   new sql.Request()
+		.input('user_id', sql.Int,user_id)
+		.input('id', sql.Int,id)
+		.query('INSERT into post_tbl_view(post_id,user_id) values (@id, @user_ID)', (err, result) => {
+		console.log(err);
+	})
+    new sql.Request()
+		.input('id', sql.Int, id)
+		.execute('view_post', (err, result) => {
+			callback(result.recordset)
+		})
+	})
+	sql.on('error', err => {
+		callback(err)
+	})
+
+
+}
+
+exports.view_post = view_post;
 exports.get_admin_dashboard = get_admin_dashboard;
 exports.get_dashboard = get_dashboard;
 exports.post_delete = post_delete;

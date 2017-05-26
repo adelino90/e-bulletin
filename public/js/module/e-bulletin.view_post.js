@@ -35,9 +35,15 @@ helper = function(){
   }
 
 
-setcontent = function(){
+setcontent = function(id){
+		var data = {id:id};
 		helper();
-		stateMap.$container.html(Handlebars.templates.view_post());
+
+		configMap.dashboard_model.get_post(data,function(response){
+			console.log(response)
+			stateMap.$container.html(Handlebars.templates.view_post(response[0]));
+		});
+
 		setJqueryMap();
 
 }
@@ -53,7 +59,7 @@ initModule = function ( $container,id ) {
 			configMap.change_option_anchor('home','ebulletin',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
 		}
 		else
-			setcontent();
+			setcontent(id);
 		
 	})
 };

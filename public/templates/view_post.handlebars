@@ -6,7 +6,7 @@
 										<div class ="col-md-12">
 											<div class="form-group">
 													<label for="focusedInput">Title</label>
-													<input class="form-control" id="t_title" type="text">
+													<input class="form-control" id="t_title" type="text" value ="{{title}}">
 											</div>
 										</div>
 							</div>
@@ -15,7 +15,7 @@
 										<div class ="col-md-12">
 											<div class="form-group">
 													<label for="focusedInput">Subject</label>
-													<input class="form-control" id="s_subject" type="text">
+													<input class="form-control" id="s_subject" type="text" value = "{{subject}}">
 											</div>
 									</div>
 							</div>
@@ -24,7 +24,7 @@
 										<div class ="col-md-12">					
 												<div class="form-group">
 														<label for="focusedInput">File</label>
-														<input class="form-control" id="f_file" type="file">
+													<img src="../upload/{{filename}}" class="img-rounded" alt="Cinque Terre" width="304" height="236">
 												</div>
 									</div>
 							</div>
@@ -33,7 +33,7 @@
 										<div class ="col-md-12">	
 												<div class="form-group">
 													<label for="comment">Description:</label>
-													<textarea class="form-control" rows="5" id="description"></textarea>
+													<textarea class="form-control" rows="5" id="description">{{description}}</textarea>
 												</div>
 										</div>
 							</div>
@@ -46,10 +46,10 @@
 														<label for="comment">Posting Date:</label>
 													</div>
 													<div class="col-md-5">
-														<input class="form-control" id="posting_date_from" placeholder="From"  type="text">
+														<input class="form-control" id="posting_date_from" placeholder="From" value ="{{posting_date_from}}"  type="text">
 													</div>
 													<div class="col-md-5">
-														<input class="form-control" id="posting_date_to" placeholder="To"  type="text">
+														<input class="form-control" id="posting_date_to" placeholder="To"  value ="{{posting_date_to}}"  type="text">
 													</div>
 												</div>
 											</div>

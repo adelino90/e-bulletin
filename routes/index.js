@@ -1,7 +1,7 @@
 var config=require('../config.json');
 const sql = require('mssql');
 var path = require('path');
-var account = require('../model/account');
+var account = require('../model/model.index');
 var sess;
 module.exports.controller = function(app) {
 app.get('/', function(req, res, next) {
@@ -18,6 +18,14 @@ app.get('/logout', function(req, res, next) {
 app.get('/getnav',function(req, res, next) {
 	var session = req.session;
 	account.get_navigation(session,function(data){
+		res.send(data);
+	});
+});
+
+app.post('/get_post',function(req, res) {
+	var odata ={id:req.body.id, user_id:req.session.user_ID};
+	console.log(odata);
+	account.view_post(odata,function(data){
 		res.send(data);
 	});
 });
@@ -122,7 +130,8 @@ app.get('/file', function(req,res){
 });
 
 app.get('/manage_posts', function(req,res){
-	 account.get_admin_dashboard(function(ret){
+	var user_id = req.session.user_ID;
+	 account.get_admin_dashboard(user_id,function(ret){
 		 res.send(ret);
 	 })
 });
