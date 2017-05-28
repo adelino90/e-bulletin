@@ -105,6 +105,16 @@ app.post('/upload',function(req,res){
 	
 });
 
+app.post('/approve_request',function(req,res){
+	var id = req.body.id;
+	account.approve_request(id,function(result){
+			if(result="OK")
+				res.send("OK");
+	})
+
+})
+
+
 app.post('/delete_post', function(req,res){
 
 	post_id = req.body.post_id;

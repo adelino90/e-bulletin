@@ -127,7 +127,22 @@ view_post = function(data,callback){
 
 
 }
-
+approve_request = function(id,callback){
+	var id = id;
+	sql.close();
+	sql.connect(config, err => {
+    new sql.Request()
+		.input('post_id', sql.Int, id)
+		.execute('approve_request', (err, result) => {
+			console.log(result)
+			callback("OK");
+		})
+	})
+	sql.on('error', err => {
+		callback(err)
+	})
+}
+exports.approve_request = approve_request;
 exports.view_post = view_post;
 exports.get_admin_dashboard = get_admin_dashboard;
 exports.get_dashboard = get_dashboard;
