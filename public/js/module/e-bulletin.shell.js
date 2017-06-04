@@ -356,7 +356,7 @@ initModule = function ( $container ) {
 		changeAnchorPart:changeAnchorPart
 	})
 	 ebulletin.nav.initModule(jqueryMap.$nav);
-
+	 	setOptionAnchor('home','ebulletin',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
 	// configure and initialize feature modules
 	// Handle URI anchor change events.
 	// This is done /after/ all feature modules are configured

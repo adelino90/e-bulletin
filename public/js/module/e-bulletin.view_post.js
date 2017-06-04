@@ -41,7 +41,7 @@ approve_post = function(e){
 		configMap.dashboard_model.approve_request(data,function(response){
 			if(response=="OK")
 				alert("APPROVED");
-					configMap.change_option_anchor('manage_posts','ebulletin',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+				configMap.change_option_anchor('manage_posts','ebulletin',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
 
 		})
 }

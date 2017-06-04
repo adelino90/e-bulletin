@@ -10,7 +10,7 @@ templates['contact'] = template({"compiler":[7,">= 4.0.0"],"main":function(conta
     + "\r\n\r\n\r\n        </div>\r\n ";
 },"useData":true});
 templates['content'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div id = \"e-bulletin-main-content\" class=\"row\">\r\n		\r\n			<div class=\"col-md-12 ebulletin-navigtion\">\r\n				<h4 class=\"text-center\">HOLLA</h4>\r\n			</div>\r\n		\r\n	\r\n			<div class=\"col-md-12 ebulletin-content\">\r\n				<h4 class=\"text-center\">HOLLA</h4>\r\n			</div>\r\n			\r\n	</div>";
+    return "<div id = \"e-bulletin-main-content\" class=\"row\">\r\n		\r\n			<div class=\"col-md-12 ebulletin-navigtion\">\r\n				\r\n			</div>\r\n		\r\n	\r\n			<div class=\"col-md-12 ebulletin-content\">\r\n				\r\n			</div>\r\n			\r\n	</div>";
 },"useData":true});
 templates['dashboard'] = template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
