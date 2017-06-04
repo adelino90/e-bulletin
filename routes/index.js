@@ -30,6 +30,11 @@ app.post('/get_post',function(req, res) {
 	});
 });
 
+app.get('/get_users',function(req, res) {
+	account.get_all_users(function(data){
+		res.send(data);
+	});
+});
 
 app.get('/contacts',function(req, res) {
 	var contact = "09054440337";

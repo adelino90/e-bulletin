@@ -52,14 +52,15 @@ ebulletin.model = (function () {
 
 dashboard = (function(){
   
-   var submitdata,get_dashboard,delete_post,get_admin_post,get_post,approve_request;
+   var submitdata,get_dashboard,delete_post,get_admin_post,get_post,approve_request,get_users;
 
      submitdata = curryStoreData("/upload");
      get_dashboard = curryFetchData("/get_dashboard");
      delete_post = curryStoreData("/delete_post");
      get_admin_post = curryFetchData("/manage_posts");      
      get_post =  curryStoreData("/get_post");     
-      approve_request =  curryStoreData("/approve_request");     
+     approve_request =  curryStoreData("/approve_request");   
+     get_users =  curryFetchData("/get_users");
      
     return {
     submitdata:submitdata,
@@ -67,7 +68,8 @@ dashboard = (function(){
     delete_post:delete_post,
     get_admin_post:get_admin_post,
     get_post:get_post,
-    approve_request:approve_request
+    approve_request:approve_request,
+    get_users:get_users
     }
 
    }());

@@ -17,7 +17,7 @@ configMap = {
 	anchor_schema_map : {
 	chat : { opened : true, closed : true , hidden:true },
 	bclick:{click:true},
-	option:{home:true,contact:true,dashboard:true,sign_out:true,manage_posts:true,view_post:true},
+	option:{home:true,contact:true,dashboard:true,sign_out:true,manage_posts:true,view_post:true,manage_users:true},
 	 _option : {id : true},
 	 filter:{search:true},
 	 _filter :{search_str:true}
@@ -198,6 +198,9 @@ onHashchange = function ( event ) {
 			case "view_post":
 				ebulletin.view_post.initModule(jqueryMap.$content,anchor_map_proposed._option.id);
 			break;
+			case "manage_users":
+				ebulletin.users.initModule( jqueryMap.$content );
+			break;
 			case "sign_out":
 				ebulletin.model.account.logout(function(response){
 					if(response){
@@ -349,6 +352,11 @@ initModule = function ( $container ) {
 		admin_user  : admin_authorize,
 		dashboard_model  : ebulletin.model.dashboard
 	})
+	ebulletin.users.configModule({
+		change_option_anchor:setOptionAnchor,
+		admin_user  : admin_authorize,
+		dashboard_model  : ebulletin.model.dashboard
+	})
 
 
 
@@ -356,7 +364,11 @@ initModule = function ( $container ) {
 		changeAnchorPart:changeAnchorPart
 	})
 	 ebulletin.nav.initModule(jqueryMap.$nav);
-	 	setOptionAnchor('home','ebulletin',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+	 user_authorize(function(data){
+		if(!data)
+		setOptionAnchor('home','ebulletin',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+	 })
+	 	//setOptionAnchor('home','ebulletin',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
 	// configure and initialize feature modules
 	// Handle URI anchor change events.
 	// This is done /after/ all feature modules are configured

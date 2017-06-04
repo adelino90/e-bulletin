@@ -19,11 +19,15 @@ login = function(data,callback){
 }
 get_navigation = function(session,callback){
 
-    	var menu = {navigation:[{bEnabled:true,bGranted:true,bVisible:true,nCaption:"HOME",nId:1,option:"home"},
+    	var menu = {navigation:[
+			{bEnabled:true,bGranted:true,bVisible:true,nCaption:"HOME",nId:1,option:"home"},
 			{bEnabled:true,bGranted:true,bVisible:true,nCaption:"CONTACT US",nId:2,option:"contact"},
 			{bEnabled:true,bGranted:true,bVisible:true,dropdown:true,dropdown_options:[{id:1,option:(session.usertype == 2 ? "dashboard" : "manage_posts"),nCaption:(session.usertype == 2 ? "My Dashboard" : "Manage Posts")},
 			{id:2,option:"sign_out",nCaption:"Sign Out"}],nCaption:"Welcome",nId:3,option:"none"}
-			],name:session.name};
+			],
+			name:session.name};
+			if(session.usertype == 1)
+			menu.navigation[2].dropdown_options.splice(1,0,{id:3,option:"manage_users",nCaption:"Manage Users"})
             callback(menu);
 }
 
@@ -124,8 +128,19 @@ view_post = function(data,callback){
 	sql.on('error', err => {
 		callback(err)
 	})
+}
 
-
+get_all_users = function(callback){
+	  sql.close();
+	sql.connect(config, err => {
+    new sql.Request()
+		.execute('view_all_users', (err, result) => {
+			callback(result.recordset)
+		})
+	})
+	sql.on('error', err => {
+		callback(err)
+	})
 }
 approve_request = function(id,callback){
 	var id = id;
@@ -150,3 +165,4 @@ exports.post_delete = post_delete;
 exports.save_post = save_post;
 exports.get_navigation = get_navigation;
 exports.login = login;
+exports.get_all_users = get_all_users;
