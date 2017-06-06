@@ -26,16 +26,18 @@ ebulletin.model = (function () {
   };
 
   account = (function(){
-	 var login,get_session,logout,admin_session;
+	 var login,get_session,logout,admin_session,view_user;
 	 login = curryStoreData('/login');
    logout = curryFetchData('/logout');
 	 get_session = curryFetchData('/getsession');
    admin_session = curryFetchData('/getadminsession');
+   view_user = curryStoreData('/view_user');
 	  return {
       login:login,
 	    get_session:get_session,
       logout:logout,
-      admin_session:admin_session
+      admin_session:admin_session,
+      view_user:view_user
     }
 	}());
   contact= (function(){

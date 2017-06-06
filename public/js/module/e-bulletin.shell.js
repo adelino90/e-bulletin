@@ -17,7 +17,7 @@ configMap = {
 	anchor_schema_map : {
 	chat : { opened : true, closed : true , hidden:true },
 	bclick:{click:true},
-	option:{home:true,contact:true,dashboard:true,sign_out:true,manage_posts:true,view_post:true,manage_users:true},
+	option:{home:true,contact:true,dashboard:true,sign_out:true,manage_posts:true,view_post:true,manage_users:true,view_user:true},
 	 _option : {id : true},
 	 filter:{search:true},
 	 _filter :{search_str:true}
@@ -201,6 +201,9 @@ onHashchange = function ( event ) {
 			case "manage_users":
 				ebulletin.users.initModule( jqueryMap.$content );
 			break;
+			case "view_user":
+				ebulletin.view_user.initModule(anchor_map_proposed._option.id, jqueryMap.$content );
+			break;
 			case "sign_out":
 				ebulletin.model.account.logout(function(response){
 					if(response){
@@ -356,6 +359,11 @@ initModule = function ( $container ) {
 		change_option_anchor:setOptionAnchor,
 		admin_user  : admin_authorize,
 		dashboard_model  : ebulletin.model.dashboard
+	})
+	ebulletin.view_user.configModule({
+		change_option_anchor:setOptionAnchor,
+		admin_user  : admin_authorize,
+		user_model  : ebulletin.model.account
 	})
 
 

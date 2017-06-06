@@ -1,25 +1,24 @@
-ebulletin.users = (function () {
+ebulletin.view_user = (function () {
 			'use strict';
 //---------------- BEGIN MODULE SCOPE VARIABLES --------------
 var
 configMap = {
 	
 	
-	dashboard_model:null,
+	user_model:null,
 	admin_user:null,
 	change_option_anchor:null,	
-    settable_map : {dashboard_model:true,change_option_anchor:true,admin_user:true}
+    settable_map : {user_model:true,change_option_anchor:true,admin_user:true}
 },
 stateMap = {$container : undefined, anchor_map : {} ,resize_idto : undefined },
 jqueryMap = {},
-setJqueryMap,configModule,setcontent,onsubmit,helper,user_add_clicked,viewclicked, initModule;
+setJqueryMap,configModule,setcontent,onsubmit,helper,viewclicked, initModule;
 
 // Begin DOM method /setJqueryMap/
 setJqueryMap = function () {
 	var $container = stateMap.$container;
-	jqueryMap = {$contact_content : $container.find('.spa-contact-content'),
-	 			$adduser:	 $container.find('#ebulletin-user-add-btn')
-				
+	jqueryMap = {$contact_content : $container.find('.spa-contact-content')
+					
 				}
 };
 
@@ -39,25 +38,21 @@ helper = function(){
 viewclicked = function(){
 	
 }
-user_add_clicked = function(){
-	configMap.change_option_anchor('view_user','new',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
-}
-setcontent = function(){
-        var html_data = {};
+setcontent = function(user_id){
+        var form_data = {user_id:user_id};
 		helper();
-        configMap.dashboard_model.get_users(function(data){
+        /*
+        configMap.user_model.view_user(form_data,function(data){
             html_data.user_data = data;
-        stateMap.$container.html(Handlebars.templates.users( html_data));
+        stateMap.$container.html(Handlebars.templates.view_user( html_data));
+        })*/
+		stateMap.$container.html(Handlebars.templates.view_user());
 		setJqueryMap();
-		jqueryMap.$adduser.click(user_add_clicked);
-        })
-		
-		
 }
 
 
 
-initModule = function ( $container ) {
+initModule = function (id, $container ) {
 	stateMap.$container = $container;
 	stateMap.$container.off().empty();
 
@@ -66,7 +61,7 @@ initModule = function ( $container ) {
 			configMap.change_option_anchor('home','ebulletin',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
 		}
 		else
-			setcontent();
+			setcontent(id);
 		
 	})
 };
