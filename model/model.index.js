@@ -157,6 +157,21 @@ approve_request = function(id,callback){
 		callback(err)
 	})
 }
+view_user = function(id,callback){
+	var id = id;
+	sql.close();
+	sql.connect(config, err => {
+    new sql.Request()
+		.input('id', sql.Int, id)
+		.execute('view_user', (err, result) => {
+			callback(result.recordset)
+		})
+	})
+	sql.on('error', err => {
+		callback(err)
+	})
+}
+
 exports.approve_request = approve_request;
 exports.view_post = view_post;
 exports.get_admin_dashboard = get_admin_dashboard;
@@ -166,3 +181,4 @@ exports.save_post = save_post;
 exports.get_navigation = get_navigation;
 exports.login = login;
 exports.get_all_users = get_all_users;
+exports.view_user = view_user;

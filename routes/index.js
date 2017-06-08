@@ -30,6 +30,13 @@ app.post('/get_post',function(req, res) {
 	});
 });
 
+app.post('/view_user',function(req, res) {
+	var id = req.body.id
+	account.view_user(id,function(data){
+		res.send(data);
+	});
+});
+
 app.get('/get_users',function(req, res) {
 	account.get_all_users(function(data){
 		res.send(data);

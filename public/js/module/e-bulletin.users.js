@@ -12,13 +12,14 @@ configMap = {
 },
 stateMap = {$container : undefined, anchor_map : {} ,resize_idto : undefined },
 jqueryMap = {},
-setJqueryMap,configModule,setcontent,onsubmit,helper,user_add_clicked,viewclicked, initModule;
+setJqueryMap,configModule,setcontent,onsubmit,helper,user_add_clicked,viewclicked,user_edit_clicked, initModule;
 
 // Begin DOM method /setJqueryMap/
 setJqueryMap = function () {
 	var $container = stateMap.$container;
 	jqueryMap = {$contact_content : $container.find('.spa-contact-content'),
-	 			$adduser:	 $container.find('#ebulletin-user-add-btn')
+	 				$adduser:	 $container.find('#ebulletin-user-add-btn'),
+					$edituser:    $container.find('.ebulletin-dashboard-edit')
 				
 				}
 };
@@ -42,6 +43,10 @@ viewclicked = function(){
 user_add_clicked = function(){
 	configMap.change_option_anchor('view_user','new',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
 }
+user_edit_clicked = function(){
+	var id = $(this).attr('data-id');
+	configMap.change_option_anchor('view_user',id,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+}
 setcontent = function(){
         var html_data = {};
 		helper();
@@ -50,6 +55,7 @@ setcontent = function(){
         stateMap.$container.html(Handlebars.templates.users( html_data));
 		setJqueryMap();
 		jqueryMap.$adduser.click(user_add_clicked);
+		jqueryMap.$edituser.click(user_edit_clicked);
         })
 		
 		

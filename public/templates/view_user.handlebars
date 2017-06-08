@@ -3,25 +3,34 @@
             <div class="form-group text-center">
             <label>Username:</label>
             <div>
-                <input type="text" class="form-control text-center" id="Username" placeholder="Enter Username" name="username">
+                <input type="text" class="form-control text-center" id="Username" value="{{username}}" placeholder="Enter Username" name="username">
             </div>
             </div>
             <div class="form-group text-center">
             <label for="pwd">Password:</label>
             <div>          
-                <input type="password" class="form-control text-center" id="pwd" placeholder="Enter password" name="pwd">
+                <input type="password" class="form-control text-center" id="pwd" value="{{password}}" placeholder="Enter password" name="pwd">
             </div>
             </div>
             <div class="form-group text-center">
             <label >Firstname:</label>
             <div>
-                <input type="text" class="form-control text-center" id="Firstname" placeholder="Enter First Name" name="Firstname">
+                <input type="text" class="form-control text-center" id="Firstname" value="{{first_name}}" placeholder="Enter First Name" name="Firstname">
             </div>
             </div>
             <div class="form-group text-center">
             <label >Lastname:</label>
             <div>
-                <input type="text" class="form-control text-center" id="Lastname" placeholder="Enter Last Name" name="Lastname">
+                <input type="text" class="form-control text-center" id="Lastname" value="{{last_name}}" placeholder="Enter Last Name" name="Lastname">
+            </div>
+            </div>
+             <div class="form-group text-center">
+            <label >Usertype:</label>
+            <div>
+               <select id ="user_type">
+                    <option value="1">Admin</option>
+                    <option value="2">User</option>
+                </select>
             </div>
             </div>
             <div class="form-group text-center">        

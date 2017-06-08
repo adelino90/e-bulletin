@@ -17,7 +17,8 @@ setJqueryMap,configModule,setcontent,onsubmit,helper,viewclicked, initModule;
 // Begin DOM method /setJqueryMap/
 setJqueryMap = function () {
 	var $container = stateMap.$container;
-	jqueryMap = {$contact_content : $container.find('.spa-contact-content')
+	jqueryMap = {$contact_content : $container.find('.spa-contact-content'),
+				$user_type: $container.find('#user_type')
 					
 				}
 };
@@ -39,15 +40,25 @@ viewclicked = function(){
 	
 }
 setcontent = function(user_id){
-        var form_data = {user_id:user_id};
+        var form_data = {id:user_id};
 		helper();
         /*
         configMap.user_model.view_user(form_data,function(data){
             html_data.user_data = data;
         stateMap.$container.html(Handlebars.templates.view_user( html_data));
         })*/
-		stateMap.$container.html(Handlebars.templates.view_user());
-		setJqueryMap();
+		if(user_id == 'new'){
+			stateMap.$container.html(Handlebars.templates.view_user());
+			setJqueryMap();
+		}
+		else{
+			configMap.user_model.view_user(form_data,function(response){
+					stateMap.$container.html(Handlebars.templates.view_user(response[0]));
+					setJqueryMap();
+					jqueryMap.$user_type.val(response[0].user_type_id);
+					setJqueryMap();
+			})
+		}
 }
 
 
