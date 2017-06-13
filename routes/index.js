@@ -37,6 +37,33 @@ app.post('/view_user',function(req, res) {
 	});
 });
 
+app.post('/update_user',function(req, res) {
+	var data = {}
+	data.user_id = req.body.user_id
+	data.fname = req.body.fname
+	data.lname = req.body.lname
+	data.username = req.body.username
+	data.password = req.body.password
+	data.user_type = req.body.user_type
+	console.log(data);
+	account.update_user(data,function(response){
+		console.log(response);
+		res.send(response);
+	});
+});
+app.post('/insert_user',function(req, res) {
+	var data = {}
+	data.fname = req.body.fname
+	data.lname = req.body.lname
+	data.username = req.body.username
+	data.password = req.body.password
+	data.user_type = req.body.user_type
+	console.log(data);
+	account.insert_user(data,function(response){
+		console.log(response);
+		res.send(response);
+	});
+});
 app.get('/get_users',function(req, res) {
 	account.get_all_users(function(data){
 		res.send(data);

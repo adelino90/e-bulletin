@@ -122,17 +122,27 @@ templates['view_post'] = template({"compiler":[7,">= 4.0.0"],"main":function(con
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" id = \"Reject\">Reject</button>\r\n										</div>\r\n							</div>\r\n					</div>\r\n				</div>	";
 },"useData":true});
-templates['view_user'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+templates['view_user'] = template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "    \r\n    <div class=\"col-md-3 col-md-offset-4 ebulletin-view_user-form\">\r\n            <div class=\"form-group text-center\">\r\n            <label>Username:</label>\r\n            <div>\r\n                <input type=\"text\" class=\"form-control text-center\" id=\"Username\" value=\""
-    + alias4(((helper = (helper = helpers.username || (depth0 != null ? depth0.username : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"username","hash":{},"data":data}) : helper)))
-    + "\" placeholder=\"Enter Username\" name=\"username\">\r\n            </div>\r\n            </div>\r\n            <div class=\"form-group text-center\">\r\n            <label for=\"pwd\">Password:</label>\r\n            <div>          \r\n                <input type=\"password\" class=\"form-control text-center\" id=\"pwd\" value=\""
-    + alias4(((helper = (helper = helpers.password || (depth0 != null ? depth0.password : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"password","hash":{},"data":data}) : helper)))
-    + "\" placeholder=\"Enter password\" name=\"pwd\">\r\n            </div>\r\n            </div>\r\n            <div class=\"form-group text-center\">\r\n            <label >Firstname:</label>\r\n            <div>\r\n                <input type=\"text\" class=\"form-control text-center\" id=\"Firstname\" value=\""
-    + alias4(((helper = (helper = helpers.first_name || (depth0 != null ? depth0.first_name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"first_name","hash":{},"data":data}) : helper)))
-    + "\" placeholder=\"Enter First Name\" name=\"Firstname\">\r\n            </div>\r\n            </div>\r\n            <div class=\"form-group text-center\">\r\n            <label >Lastname:</label>\r\n            <div>\r\n                <input type=\"text\" class=\"form-control text-center\" id=\"Lastname\" value=\""
-    + alias4(((helper = (helper = helpers.last_name || (depth0 != null ? depth0.last_name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"last_name","hash":{},"data":data}) : helper)))
-    + "\" placeholder=\"Enter Last Name\" name=\"Lastname\">\r\n            </div>\r\n            </div>\r\n             <div class=\"form-group text-center\">\r\n            <label >Usertype:</label>\r\n            <div>\r\n               <select id =\"user_type\">\r\n                    <option value=\"1\">Admin</option>\r\n                    <option value=\"2\">User</option>\r\n                </select>\r\n            </div>\r\n            </div>\r\n            <div class=\"form-group text-center\">        \r\n            <div class=\"col-md-offset-1 col-sm-10\">\r\n                <button type=\"submit\" class=\"btn btn-info\">Submit</button>\r\n            </div>\r\n            </div>\r\n    </div>";
+  return "                        <option value=\""
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias4(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper)))
+    + "</option>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "    \r\n    <div class=\"col-md-3 col-md-offset-4 ebulletin-view_user-form\">\r\n            <div class=\"form-group text-center\">\r\n            <label>Username:</label>\r\n            <div>\r\n                <input type=\"text\" class=\"form-control text-center\" id=\"username\" value=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.data : depth0)) != null ? stack1.username : stack1), depth0))
+    + "\" placeholder=\"Enter Username\" name=\"username\">\r\n            </div>\r\n            </div>\r\n            <div class=\"form-group text-center\">\r\n            <label for=\"pwd\">Password:</label>\r\n            <div>          \r\n                <input type=\"password\" class=\"form-control text-center\" id=\"password\" value=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.data : depth0)) != null ? stack1.password : stack1), depth0))
+    + "\" placeholder=\"Enter password\" name=\"pwd\">\r\n            </div>\r\n            </div>\r\n            <div class=\"form-group text-center\">\r\n            <label >Firstname:</label>\r\n            <div>\r\n                <input type=\"text\" class=\"form-control text-center\" id=\"fname\" value=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.data : depth0)) != null ? stack1.first_name : stack1), depth0))
+    + "\" placeholder=\"Enter First Name\" name=\"Firstname\">\r\n            </div>\r\n            </div>\r\n            <div class=\"form-group text-center\">\r\n            <label >Lastname:</label>\r\n            <div>\r\n                <input type=\"text\" class=\"form-control text-center\" id=\"lname\" value=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.data : depth0)) != null ? stack1.last_name : stack1), depth0))
+    + "\" placeholder=\"Enter Last Name\" name=\"Lastname\">\r\n            </div>\r\n            </div>\r\n             <div class=\"form-group text-center\">\r\n            <label >Usertype:</label>\r\n            <div>\r\n               <select id =\"user_type\">\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.dropdown : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "                </select>\r\n            </div>\r\n            </div>\r\n            <div class=\"form-group text-center\">        \r\n            <div class=\"col-md-12 e-bulletin-button-grp\">\r\n                <button type=\"submit\" class=\"btn btn-info\" id = \"user_submit\">Submit</button>\r\n                <button type=\"submit\" class=\"btn btn-danger\" id = \"user_cancel\">Cancel</button>\r\n            </div>\r\n            </div>\r\n    </div>";
 },"useData":true});
 })();

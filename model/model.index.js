@@ -1,7 +1,7 @@
 
 var config=require('../config.json');
 const sql = require('mssql');
-
+process.setMaxListeners(0);
 login = function(data,callback){
 
             sql.close();
@@ -130,6 +130,47 @@ view_post = function(data,callback){
 	})
 }
 
+
+update_user = function(data,callback){
+	sql.close();
+	sql.connect(config, err => {
+
+
+    new sql.Request()
+		.input('user_id', sql.Int, data.user_id)
+		.input('fname', sql.NVarChar, data.fname)
+		.input('lname', sql.NVarChar, data.lname)
+		.input('username', sql.NVarChar, data.username)
+		.input('password', sql.NVarChar, data.password)
+		.input('user_type', sql.Int, data.user_type)
+		.execute('update_user', (err, result) => {
+			callback(result.recordset)
+		})
+	})
+	sql.on('error', err => {
+		callback(err)
+	})
+}
+
+insert_user = function(data,callback){
+	sql.close();
+	sql.connect(config, err => {
+
+
+    new sql.Request()
+		.input('fname', sql.NVarChar, data.fname)
+		.input('lname', sql.NVarChar, data.lname)
+		.input('username', sql.NVarChar, data.username)
+		.input('password', sql.NVarChar, data.password)
+		.input('user_type', sql.Int, data.user_type)
+		.execute('insert_user', (err, result) => {
+			callback(result.recordset)
+		})
+	})
+	sql.on('error', err => {
+		callback(err)
+	})
+}
 get_all_users = function(callback){
 	  sql.close();
 	sql.connect(config, err => {
@@ -159,19 +200,30 @@ approve_request = function(id,callback){
 }
 view_user = function(id,callback){
 	var id = id;
+	var obj = {};
 	sql.close();
 	sql.connect(config, err => {
+
+
+	 new sql.Request().query('Select * from user_type', (err, result) => {
+		 obj.dropdown  = result.recordset;
+    })
+
     new sql.Request()
 		.input('id', sql.Int, id)
 		.execute('view_user', (err, result) => {
-			callback(result.recordset)
+			obj.data  = result.recordset[0];
+			callback(obj)
 		})
+
+
 	})
 	sql.on('error', err => {
 		callback(err)
 	})
 }
-
+exports.insert_user = insert_user;
+exports.update_user = update_user;
 exports.approve_request = approve_request;
 exports.view_post = view_post;
 exports.get_admin_dashboard = get_admin_dashboard;

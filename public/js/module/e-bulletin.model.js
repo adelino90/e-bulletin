@@ -26,18 +26,22 @@ ebulletin.model = (function () {
   };
 
   account = (function(){
-	 var login,get_session,logout,admin_session,view_user;
+	 var login,get_session,logout,admin_session,view_user,update_user,insert_user;
 	 login = curryStoreData('/login');
    logout = curryFetchData('/logout');
 	 get_session = curryFetchData('/getsession');
    admin_session = curryFetchData('/getadminsession');
    view_user = curryStoreData('/view_user');
+   update_user = curryStoreData('/update_user');
+   insert_user = curryStoreData('/insert_user');
 	  return {
       login:login,
 	    get_session:get_session,
       logout:logout,
       admin_session:admin_session,
-      view_user:view_user
+      view_user:view_user,
+      update_user:update_user,
+      insert_user:insert_user
     }
 	}());
   contact= (function(){
