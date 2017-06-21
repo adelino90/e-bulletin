@@ -1,7 +1,7 @@
 var config=require('../config.json');
 const sql = require('mssql');
 var path = require('path');
-var account = require('../model/model.index');
+var model = require('../model/model.index');
 var sess;
 module.exports.controller = function(app) {
 app.get('/', function(req, res, next) {
@@ -17,7 +17,13 @@ app.get('/logout', function(req, res, next) {
 
 app.get('/getnav',function(req, res, next) {
 	var session = req.session;
-	account.get_navigation(session,function(data){
+	model.get_navigation(session,function(data){
+		res.send(data);
+	});
+});
+
+app.get('/get_bulletin',function(req, res, next) {
+	model.get_bulletin(function(data){
 		res.send(data);
 	});
 });
@@ -25,14 +31,14 @@ app.get('/getnav',function(req, res, next) {
 app.post('/get_post',function(req, res) {
 	var odata ={id:req.body.id, user_id:req.session.user_ID};
 	console.log(odata);
-	account.view_post(odata,function(data){
+	model.view_post(odata,function(data){
 		res.send(data);
 	});
 });
 
 app.post('/view_user',function(req, res) {
 	var id = req.body.id
-	account.view_user(id,function(data){
+	model.view_user(id,function(data){
 		res.send(data);
 	});
 });
@@ -46,7 +52,7 @@ app.post('/update_user',function(req, res) {
 	data.password = req.body.password
 	data.user_type = req.body.user_type
 	console.log(data);
-	account.update_user(data,function(response){
+	model.update_user(data,function(response){
 		console.log(response);
 		res.send(response);
 	});
@@ -59,13 +65,13 @@ app.post('/insert_user',function(req, res) {
 	data.password = req.body.password
 	data.user_type = req.body.user_type
 	console.log(data);
-	account.insert_user(data,function(response){
+	model.insert_user(data,function(response){
 		console.log(response);
 		res.send(response);
 	});
 });
 app.get('/get_users',function(req, res) {
-	account.get_all_users(function(data){
+	model.get_all_users(function(data){
 		res.send(data);
 	});
 });
@@ -96,7 +102,7 @@ app.get('/getadminsession',function(req,res){
 });
 app.post('/login',function(req,res){
 	var data = req.body;
-	account.login(data,function(result){
+	model.login(data,function(result){
 
 				if(result.recordset.length>0){
 					  req.session.user_ID = result.recordset[0].id;
@@ -133,8 +139,8 @@ app.post('/upload',function(req,res){
 	 odata.name = name;
 	 odata.description = req.body.description;
 	 odata.date_from = req.body.date_from;
-	 odata.date_to = req.body.to;
-	 account.save_post(odata,function(rdata){
+	 odata.date_to = req.body.date_to;
+	 model.save_post(odata,function(rdata){
 		 if(rdata)
 		 	res.send('Success!');
 	 })
@@ -146,7 +152,7 @@ app.post('/upload',function(req,res){
 
 app.post('/approve_request',function(req,res){
 	var id = req.body.id;
-	account.approve_request(id,function(result){
+	model.approve_request(id,function(result){
 			if(result="OK")
 				res.send("OK");
 	})
@@ -158,7 +164,7 @@ app.post('/delete_post', function(req,res){
 
 	post_id = req.body.post_id;
 
-	account.post_delete(post_id,function(ret){
+	model.post_delete(post_id,function(ret){
 		res.send(ret);
 	});
 
@@ -168,7 +174,7 @@ app.post('/delete_post', function(req,res){
 app.get('/get_dashboard',function(req,res){
 
 	  session_id =  req.session.user_ID;
-	 account.get_dashboard(session_id,function(ret){
+	 model.get_dashboard(session_id,function(ret){
 		 res.send(ret);
 	 });
 });
@@ -180,7 +186,7 @@ app.get('/file', function(req,res){
 
 app.get('/manage_posts', function(req,res){
 	var user_id = req.session.user_ID;
-	 account.get_admin_dashboard(user_id,function(ret){
+	 model.get_admin_dashboard(user_id,function(ret){
 		 res.send(ret);
 	 })
 });

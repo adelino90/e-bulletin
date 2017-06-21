@@ -31,7 +31,21 @@ get_navigation = function(session,callback){
             callback(menu);
 }
 
+get_bulletin = function(callback){
+	  sql.close();
+	  sql.connect(config).then(pool => {
+	  return pool.request()
+	  .execute('get_bulletin')
+	  }).then(result => {
+	     callback(result.recordset)
+	  }).catch(err => {
+			callback(err) 
+	  })	
+	  sql.on('error', err => {
+		    callback(err)
+	 })
 
+}
 save_post = function(data,callback){
             sql.close();
 	        sql.connect(config).then(pool => {
@@ -234,3 +248,4 @@ exports.get_navigation = get_navigation;
 exports.login = login;
 exports.get_all_users = get_all_users;
 exports.view_user = view_user;
+exports.get_bulletin = get_bulletin;

@@ -5,13 +5,13 @@ var
 configMap = {
 	
 	
-
+    e_bulletin_model:null,
 	changeAnchorPart:null,	
-    settable_map : {changeAnchorPart:true}
+    settable_map : { e_bulletin_model:true,changeAnchorPart:true}
 },
 stateMap = {$container : undefined, anchor_map : {} ,resize_idto : undefined },
 jqueryMap = {},
-copyAnchorMap,setJqueryMap,configModule,onTapAcct,setChatAnchor,onClickChat,setcontent, onResize, initModule;
+copyAnchorMap,setJqueryMap,configModule,onTapAcct,setChatAnchor,onClickChat,setcontent, sethelpers, onResize, initModule;
 
 // Begin DOM method /setJqueryMap/
 setJqueryMap = function () {
@@ -29,12 +29,26 @@ setJqueryMap = function () {
     });
     return true;
   };
+sethelpers = function(){
+    Handlebars.registerHelper('ifCond', function(v1, v2, options) {
+        if(v1 === v2) {
+        return options.fn(this);
+        }
+    return options.inverse(this);
+    });
+ 
 
+}
 
 setcontent = function(){
+    sethelpers();
+    var data_obj= {};
+configMap.e_bulletin_model.get_bulletin(function(response){
+    data_obj.bulletin_data = response
+    stateMap.$container.html(Handlebars.templates.home(data_obj));
+});
 
 
-stateMap.$container.html(Handlebars.templates.home( ));
 
 
 }

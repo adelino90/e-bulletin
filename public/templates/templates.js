@@ -50,8 +50,36 @@ templates['dropdown_options'] = template({"1":function(container,depth0,helpers,
     + ((stack1 = (helpers.list || (depth0 && depth0.list) || alias2).call(alias1,(depth0 != null ? depth0.dropdown : depth0),{"name":"list","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\r\n\r\n		  </ul>\r\n					        </div>";
 },"useData":true});
-templates['home'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return " <div class = \"col-md-9\">\r\n	 <div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\">\r\n    <!-- Indicators -->\r\n    <ol class=\"carousel-indicators\">\r\n      <li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\"></li>\r\n      <li data-target=\"#myCarousel\" data-slide-to=\"1\"></li>\r\n      <li data-target=\"#myCarousel\" data-slide-to=\"2\"></li>\r\n      <li data-target=\"#myCarousel\" data-slide-to=\"3\"></li>\r\n    </ol>\r\n\r\n    <!-- Wrapper for slides -->\r\n    <div class=\"carousel-inner\" role=\"listbox\">\r\n\r\n      <div class=\"item active\">\r\n        <img src=\"../demo/i3.jpg\" alt=\"Chania\" width=\"760\" height=\"345\">\r\n        <div class=\"carousel-caption\">\r\n          <h3>Chania</h3>\r\n          <p>The atmosphere in Chania has a touch of Florence and Venice.</p>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"item\">\r\n        <img src=\"../demo/i2.jpg\" alt=\"Chania\" width=\"760\" height=\"345\">\r\n        <div class=\"carousel-caption\">\r\n          <h3>Chania</h3>\r\n          <p>The atmosphere in Chania has a touch of Florence and Venice.</p>\r\n        </div>\r\n      </div>\r\n    \r\n      <div class=\"item\">\r\n        <img src=\"../demo/i1.jpg\" alt=\"Flower\" width=\"760\" height=\"345\">\r\n        <div class=\"carousel-caption\">\r\n          <h3>Flowers</h3>\r\n          <p>Beautiful flowers in Kolymbari, Crete.</p>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"item\">\r\n        <img src=\"../demo/i2.jpg\" alt=\"Flower\" width=\"760\" height=\"345\">\r\n        <div class=\"carousel-caption\">\r\n          <h3>Flowers</h3>\r\n          <p>Beautiful flowers in Kolymbari, Crete.</p>\r\n        </div>\r\n      </div>\r\n  \r\n    </div>\r\n\r\n    <!-- Left and right controls -->\r\n    <a class=\"left carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\">\r\n      <span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Previous</span>\r\n    </a>\r\n    <a class=\"right carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\">\r\n      <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Next</span>\r\n    </a>\r\n  </div>\r\n      \r\n\r\n        </div>\r\n \r\n  <div class = \"col-md-3\">\r\n		<h1>Home</h1>\r\n		\r\n \r\n    <label> Welcome To Home<br>\r\n \r\n      \r\n\r\n        </div>\r\n ";
+templates['home'] = template({"1":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return "        <li data-target=\"#myCarousel\" data-slide-to=\""
+    + container.escapeExpression(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"index","hash":{},"data":data}) : helper)))
+    + "\"></li>\r\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "                <div class=\"item "
+    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(data && data.index),0,{"name":"ifCond","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\">\r\n                  <img src=\"../upload/"
+    + alias4(((helper = (helper = helpers.Files || (depth0 != null ? depth0.Files : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Files","hash":{},"data":data}) : helper)))
+    + "\" alt=\""
+    + alias4(((helper = (helper = helpers.subject || (depth0 != null ? depth0.subject : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"subject","hash":{},"data":data}) : helper)))
+    + "\" width=\"760\" height=\"345\">\r\n                  <div class=\"carousel-caption\">\r\n                    <h3>"
+    + alias4(((helper = (helper = helpers.subject || (depth0 != null ? depth0.subject : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"subject","hash":{},"data":data}) : helper)))
+    + "</h3>\r\n                    <p>"
+    + alias4(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper)))
+    + "</p>\r\n                  </div>\r\n                </div>\r\n";
+},"4":function(container,depth0,helpers,partials,data) {
+    return "active";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : {};
+
+  return " <div class = \"col-md-9\">\r\n	 <div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\">\r\n    <!-- Indicators -->\r\n    <ol class=\"carousel-indicators\">\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.bulletin_data : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    </ol>\r\n\r\n    <!-- Wrapper for slides -->\r\n    <div class=\"carousel-inner\" role=\"listbox\">\r\n\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.bulletin_data : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\r\n  \r\n    </div>\r\n\r\n    <!-- Left and right controls -->\r\n    <a class=\"left carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\">\r\n      <span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Previous</span>\r\n    </a>\r\n    <a class=\"right carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\">\r\n      <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Next</span>\r\n    </a>\r\n  </div>\r\n      \r\n\r\n        </div>\r\n \r\n  <div class = \"col-md-3\">\r\n		<h1>Home</h1>\r\n		\r\n \r\n    <label> Welcome To Home<br>\r\n \r\n      \r\n\r\n        </div>\r\n ";
 },"useData":true});
 templates['post_request'] = template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -64,7 +92,9 @@ templates['post_request'] = template({"1":function(container,depth0,helpers,part
     + alias4(((helper = (helper = helpers.status || (depth0 != null ? depth0.status : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"status","hash":{},"data":data}) : helper)))
     + "\">"
     + alias4(((helper = (helper = helpers.status || (depth0 != null ? depth0.status : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"status","hash":{},"data":data}) : helper)))
-    + "</span></td>\r\n															<td>May 20 2017</td>\r\n															<td class=\"ebulletin-post_request_action\" data-id = \""
+    + "</span></td>\r\n															<td>"
+    + alias4(((helper = (helper = helpers.date_submited || (depth0 != null ? depth0.date_submited : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"date_submited","hash":{},"data":data}) : helper)))
+    + "</td>\r\n															<td class=\"ebulletin-post_request_action\" data-id = \""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\">"
     + ((stack1 = (helpers.viewed || (depth0 && depth0.viewed) || alias2).call(alias1,(depth0 != null ? depth0.viewed : depth0),{"name":"viewed","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")

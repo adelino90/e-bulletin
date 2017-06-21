@@ -1,6 +1,6 @@
 ebulletin.model = (function () {
   'use strict';
-  var curryFetchData,curryStoreData,navigation,contact,account,dashboard;
+  var curryFetchData,curryStoreData,navigation,contact,account,dashboard,bulletin_board;
   
   
   
@@ -44,8 +44,20 @@ ebulletin.model = (function () {
       insert_user:insert_user
     }
 	}());
-  contact= (function(){
- var get_contacts;
+
+bulletin_board = (function(){
+  var get_bulletin;
+
+      get_bulletin =curryFetchData ("/get_bulletin");
+
+
+    return {
+      get_bulletin:get_bulletin
+    }
+   }());
+
+contact= (function(){
+  var get_contacts;
 
       get_contacts =curryFetchData ("/contacts");
 
@@ -53,7 +65,6 @@ ebulletin.model = (function () {
     return {
       get_contacts:get_contacts
     }
-
    }());
 
 dashboard = (function(){
@@ -98,6 +109,7 @@ navigation = (function(){
     navigation : navigation,
     contact    :contact,
     account     :account,
-    dashboard   :dashboard
+    dashboard   :dashboard,
+    bulletin_board :bulletin_board
   };
   }());

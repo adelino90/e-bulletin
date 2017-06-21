@@ -365,12 +365,11 @@ initModule = function ( $container ) {
 		admin_user  : admin_authorize,
 		user_model  : ebulletin.model.account
 	})
-
-
-
 	ebulletin.home.configModule({
+		e_bulletin_model:ebulletin.model.bulletin_board,
 		changeAnchorPart:changeAnchorPart
 	})
+
 	 ebulletin.nav.initModule(jqueryMap.$nav);
 	 user_authorize(function(data){
 		if(!data)
