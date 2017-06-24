@@ -27,6 +27,7 @@ background: #FFA07A;
 	border-radius: 10px;
 	margin-top:-1%;
 	border     : 1px solid #D9DEDD;
+	min-height: 300px
 }
 
 #e-bulletin-main-container{

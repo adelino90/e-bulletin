@@ -2,6 +2,11 @@
 var config=require('../config.json');
 const sql = require('mssql');
 process.setMaxListeners(0);
+const gpool = new sql.ConnectionPool(config)
+ 
+gpool.connect(err => {
+    // ... 
+})
 login = function(data,callback){
 
             sql.close();
@@ -32,43 +37,31 @@ get_navigation = function(session,callback){
 }
 
 get_bulletin = function(callback){
-	  sql.close();
-	  sql.connect(config).then(pool => {
-	  return pool.request()
-	  .execute('get_bulletin')
-	  }).then(result => {
-	     callback(result.recordset)
-	  }).catch(err => {
-			callback(err) 
-	  })	
-	  sql.on('error', err => {
-		    callback(err)
-	 })
-
+	 var ret;
+	 sql.close();
+	const request = new sql.Request(gpool)
+		request.execute('get_bulletin', (err, result) => {
+			//console.log(result)
+		callback(result.recordset);
+    // ... 
+	})
 }
 save_post = function(data,callback){
             sql.close();
-	        sql.connect(config).then(pool => {
-			return pool.request()
-			.input('user_id', sql.Int, data.user_ID)
-			.input('title', sql.NVarChar, data.title)
-			.input('subject', sql.NVarChar, data.subject)
-			.input('filename', sql.NVarChar, data.name)
-			.input('description', sql.NVarChar, data.description)
-			.input('pdate_from', sql.NVarChar, data.date_from)
-			.input('pdate_to',  sql.NVarChar,data.date_to)
-			.input('status',  sql.NVarChar, false)
-			.execute('insert_post')
-		}).then(result => {
-			callback(true);
-			console.dir(result)
-		}).catch(err => {
-			// ... error checks
-			console.log(err) 
-		})	
-        sql.on('error', err => {
-            console.log(err)
-        })
+				const request = new sql.Request(gpool)
+				.input('user_id', sql.Int, data.user_ID)
+				.input('title', sql.NVarChar, data.title)
+				.input('subject', sql.NVarChar, data.subject)
+				.input('filename', sql.NVarChar, data.name)
+				.input('description', sql.NVarChar, data.description)
+				.input('pdate_from', sql.NVarChar, data.date_from)
+				.input('pdate_to',  sql.NVarChar,data.date_to)
+				.input('status',  sql.NVarChar, false)
+				request.execute('insert_post', (err, result) => {
+					//console.log(result)
+				callback(true);
+			// ... 
+			})
 }
 
 post_delete = function(id,callback){
@@ -88,60 +81,51 @@ post_delete = function(id,callback){
 }
 
 get_dashboard = function(session_id,callback){
-      sql.close();
-	  sql.connect(config).then(pool => { 
-			return pool.request()
-			.input('user_id', sql.Int, session_id)
-			.execute('get_dashboard')
-		}).then(result => {
-			callback(result.recordset)
-		}).catch(err => {
-			callback(err) 
-		})
-		sql.on('error', err => {
-			callback(err)
-		})
+		 sql.close();
+	  const request = new sql.Request(gpool)
+	  	request.input('user_id', sql.Int, session_id)
+		request.execute('get_dashboard', (err, result) => {
+			//console.log(result)
+		callback(result.recordset);
+    // ... 
+	})
 
 }
 get_admin_dashboard = function(id,callback){
       sql.close();
-	  sql.connect(config).then(pool => {
-			return pool.request()
-			.input('user_id', sql.Int, id)
-			.execute('admin_post_view')
-		}).then(result => {
-			callback(result.recordset)
-		}).catch(err => {
-			// ... error checks
-			console.log(err) 
-		})
-		
-        sql.on('error', err => {
-            console.log(err)
-        })
+	  const request = new sql.Request(gpool)
+	  	request.input('user_id', sql.Int, id)
+		request.execute('admin_post_view', (err, result) => {
+			//console.log(result)
+		callback(result.recordset);
+    // ... 
+	})
 }
 
-view_post = function(data,callback){
-	var id = data.id, user_id = data.user_id
-	console.log(data);
-	  sql.close();
-	sql.connect(config, err => {
 
-   new sql.Request()
-		.input('user_id', sql.Int,user_id)
-		.input('id', sql.Int,id)
-		.query('INSERT into post_tbl_view(post_id,user_id) values (@id, @user_ID)', (err, result) => {
-		console.log(err);
+view_post = function(data,callback){
+
+
+	var id = data.id, user_id = data.user_id
+	sql.close();
+
+	  const request1 = new sql.Request(gpool)
+		request1.input('user_id', sql.Int,user_id)
+		request1.input('id', sql.Int,id)
+		request1.query('INSERT into post_tbl_view(post_id,user_id) values (@id, @user_ID)', (err, result) => {
+			//console.log(result)
+		//console.log(err);
 	})
-    new sql.Request()
-		.input('id', sql.Int, id)
-		.execute('view_post', (err, result) => {
-			callback(result.recordset)
-		})
+
+	    sql.close();
+	  const request2 = new sql.Request(gpool)
+	  	request2.input('id', sql.Int, id)
+		request2.execute('view_post', (err, result) => {
+			//console.log(result)
+		callback(result.recordset);
+    // ... 
 	})
-	sql.on('error', err => {
-		callback(err)
-	})
+
 }
 
 

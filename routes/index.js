@@ -30,7 +30,6 @@ app.get('/get_bulletin',function(req, res, next) {
 
 app.post('/get_post',function(req, res) {
 	var odata ={id:req.body.id, user_id:req.session.user_ID};
-	console.log(odata);
 	model.view_post(odata,function(data){
 		res.send(data);
 	});

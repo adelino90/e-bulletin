@@ -372,8 +372,9 @@ initModule = function ( $container ) {
 
 	 ebulletin.nav.initModule(jqueryMap.$nav);
 	 user_authorize(function(data){
-		if(!data)
+		if(!data){
 		setOptionAnchor('home','ebulletin',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+		}
 	 })
 	 	//setOptionAnchor('home','ebulletin',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
 	// configure and initialize feature modules

@@ -10,7 +10,7 @@ ebulletin.model = (function () {
       $.get( url + id )
         .done( fn )
         .fail( function( jqxhr, text_status, error ) {
-         alert( 'Error occured.' );
+         console.log( 'Error occured.' );
         });
     }
   };
@@ -20,7 +20,7 @@ ebulletin.model = (function () {
       $.post( url, data_map )
         .done( fn )
         .fail( function( jqxhr, text_status, error ) {
-          alert( 'Error occured.' );
+          console.log( 'Error occured.' );
         });
     }
   };
